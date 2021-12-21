@@ -34,5 +34,16 @@ namespace ZakladOptyczny.Models.Actors
         {
             throw new NotImplementedException();
         }
+
+        public Appointment ChangeAppointmentAttendedState(Appointment appointment, bool isAttended)
+        {
+            appointment.IsAttended = isAttended;
+            return appointment;
+        }
+
+        public List<User> SearchUsers(string searchPhrase)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

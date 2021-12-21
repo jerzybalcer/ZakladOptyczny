@@ -19,5 +19,17 @@ namespace ZakladOptyczny.Models.Actors
         {
             throw new NotImplementedException();
         }
+
+        public Appointment AddNote(Appointment appointment, string note)
+        {
+            appointment.Note = note;
+            return appointment;
+        }
+
+        public Appointment AddPrescription(Appointment appointment, Prescription prescription)
+        {
+            appointment.Prescription = prescription;
+            return appointment;
+        }
     }
 }
