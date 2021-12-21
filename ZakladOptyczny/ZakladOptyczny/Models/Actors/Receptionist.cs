@@ -25,7 +25,7 @@ namespace ZakladOptyczny.Models.Actors
             throw new NotImplementedException();
         }
 
-        public void GetAppointmentsCalendar()
+        public List<Appointment> GetAppointmentsCalendar()
         {
             throw new NotImplementedException();
         }

@@ -2,6 +2,11 @@
 {
     public class Notification
     {
-        public string? Content { get; set; }
+        public string Content { get; set; }
+
+        public Notification(string content)
+        {
+            Content = content;
+        }
     }
 }

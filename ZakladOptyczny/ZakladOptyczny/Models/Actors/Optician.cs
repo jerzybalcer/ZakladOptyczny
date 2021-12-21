@@ -10,7 +10,7 @@ namespace ZakladOptyczny.Models.Actors
             // base constructor already called at this point
         }
 
-        public void GetAppointmentsCalendar()
+        public List<Appointment> GetAppointmentsCalendar()
         {
             throw new NotImplementedException();
         }
