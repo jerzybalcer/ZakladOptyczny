@@ -5,7 +5,7 @@ namespace ZakladOptyczny.Models.Actors
 {
     public class Optician : User, ICalendarManager
     {
-        public Optician(int userId, string name, string surname, string pesel, string email) : base(userId, name, surname, pesel, email)
+        public Optician(string name, string surname, string pesel, string email) : base(name, surname, pesel, email)
         {
             // base constructor already called at this point
         }

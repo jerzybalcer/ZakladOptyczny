@@ -8,9 +8,8 @@
         public string Pesel { get; private set; }
         public string Email { get; private set; }
 
-        public User(int userId, string name, string surname, string pesel, string email)
+        public User(string name, string surname, string pesel, string email)
         {
-            UserId = userId;
             Name = name;
             Surname = surname;  
             Pesel = pesel;
