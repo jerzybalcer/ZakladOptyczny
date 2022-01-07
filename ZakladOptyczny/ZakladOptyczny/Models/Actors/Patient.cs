@@ -1,7 +1,4 @@
-﻿using ZakladOptyczny.Models.Interfaces;
-using ZakladOptyczny.Models.Utilities;
-
-namespace ZakladOptyczny.Models.Actors
+﻿namespace ZakladOptyczny.Models.Actors
 {
     public class Patient : User
     {

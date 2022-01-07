@@ -16,24 +16,32 @@ namespace ZakladOptyczny.Models.Utilities.Database.Users
             return _db.Users.ToList();
         }
 
-        public User GetUserById(int id)
+        public User? GetUserById(int id)
         {
-            throw new NotImplementedException();
+            return _db.Users.FirstOrDefault(user => user.UserId == id);
         }
 
-        public void AddUser()
+        public List<User> GetMatchingUsers(string searchPhrase)
         {
-            throw new NotImplementedException();
+            return _db.Users.Where(user => user.Name.Contains(searchPhrase) || user.Surname.Contains(searchPhrase)).ToList();
         }
 
-        public void UpdateUser()
+        public void AddUser(User user)
         {
-            throw new NotImplementedException();
+            _db.Users.Add(user);
+            _db.SaveChanges();
         }
 
-        public void DeleteUser()
+        public void UpdateUser(User user)
         {
-            throw new NotImplementedException();
+            _db.Users.Update(user);
+            _db.SaveChanges();
+        }
+
+        public void DeleteUser(User user)
+        {
+            _db.Users.Remove(user);
+            _db.SaveChanges();
         }
     }
 }

@@ -8,7 +8,7 @@ namespace ZakladOptyczny.Models.Utilities.Database.Appointments
 
         public List<Appointment> GetUserAppointments(User user);
 
-        public Appointment GetAppointmentById(int id);
+        public Appointment? GetAppointmentById(int id);
 
         public Appointment MakeAppointment(DateTime date, User user);
 
