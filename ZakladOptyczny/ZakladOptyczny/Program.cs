@@ -1,15 +1,23 @@
 using Microsoft.EntityFrameworkCore;
+using ZakladOptyczny.Models.Utilities.Database.Appointments;
 using ZakladOptyczny.Models.Utilities.Database;
+using ZakladOptyczny.Models.Utilities.Database.Users;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+// register database context
 builder.Services.AddDbContext<DatabaseContext>(options =>
 {
+    // connection string in appsettings.json
     options.UseSqlServer(builder.Configuration.GetConnectionString("DatabaseContext"));
 });
+
+// services used to access database
+builder.Services.AddScoped<IAppointmentManager, AppointmentManager>();
+builder.Services.AddScoped<IUsersManager, UsersManager>();
 
 var app = builder.Build();
 
