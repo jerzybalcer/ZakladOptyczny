@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using ZakladOptyczny.Models;
+using ZakladOptyczny.Models.Actors;
 using ZakladOptyczny.Models.Utilities.Database.Appointments;
 using ZakladOptyczny.Models.Utilities.Database.Users;
 
@@ -21,8 +22,6 @@ namespace ZakladOptyczny.Controllers
 
         public IActionResult Index()
         {
-            //var users = _usersManager.GetAllUsers();
-
             return View();
         }
 

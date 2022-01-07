@@ -6,12 +6,14 @@ namespace ZakladOptyczny.Models.Utilities.Database.Users
     {
         public List<User> GetAllUsers();
 
-        public User GetUserById(int id);
+        public User? GetUserById(int id);
 
-        public void AddUser();
+        public List<User> GetMatchingUsers(string searchPhrase);
 
-        public void UpdateUser();
+        public void AddUser(User user);
 
-        public void DeleteUser();
+        public void UpdateUser(User user);
+
+        public void DeleteUser(User user);
     }
 }

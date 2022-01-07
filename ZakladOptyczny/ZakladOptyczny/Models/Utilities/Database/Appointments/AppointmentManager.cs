@@ -18,12 +18,12 @@ namespace ZakladOptyczny.Models.Utilities.Database.Appointments
 
         public List<Appointment> GetUserAppointments(User user)
         {
-            throw new NotImplementedException();
+            return _db.Appointments.Where(a => a.User == user).ToList();
         }
 
-        public Appointment GetAppointmentById(int id)
+        public Appointment? GetAppointmentById(int id)
         {
-            throw new NotImplementedException();
+            return _db.Appointments.FirstOrDefault(a => a.AppointmentId == id);
         }
 
         public Appointment MakeAppointment(DateTime date, User user)
@@ -46,9 +46,9 @@ namespace ZakladOptyczny.Models.Utilities.Database.Appointments
             _db.SaveChanges();
         }
 
-        public void UpdateAppointment(Appointment newAppointment)
+        public void UpdateAppointment(Appointment appointment)
         {
-            // update
+            _db.Appointments.Update(appointment);
             _db.SaveChanges();
         }
     }
