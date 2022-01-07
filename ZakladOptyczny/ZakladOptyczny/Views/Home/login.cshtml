@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<div class="content">
+    <img class="logo" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+    <h1 class="title">Zakład optyczny</h1>
+    <div class="sub-text">
+        <p class="text">Zaloguj się aby uzyskać dostęp do internetowego panelu pacjęta.</p>
+        <div id="my-signin2"/>
+    </div>
+</div>
+
+<script>
+    function onSuccess(googleUser) {
+      console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+    }
+    function onFailure(error) {
+      console.log(error);
+    }
+    function renderButton() {
+      gapi.signin2.render('my-signin2', {
+        'scope': 'profile email',
+        'width': 240,
+        'height': 50,
+        'longtitle': true,
+        'theme': 'dark',
+        'onsuccess': onSuccess,
+        'onfailure': onFailure
+      });
+    }
+  </script>
+
+  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>

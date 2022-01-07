@@ -1,0 +1,44 @@
+﻿.content {
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+    text-align: center;
+    margin: 0;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.logo {
+    display: block;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 1.5rem;
+}
+
+.title {
+    font-weight: 700;
+    font-size: calc(1.425rem + 2.1vw);
+    font-weight: 300;
+    line-height: 1.2;
+    font-size: 3rem;
+}
+
+.sub-text {
+    flex: 0 0 auto;
+    width: 50%;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.text {
+    font-size: 1.25rem;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+}
+#my-signin2 {
+    display:flex;
+    justify-content: center;
+}

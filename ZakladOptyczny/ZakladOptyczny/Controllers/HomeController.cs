@@ -22,7 +22,7 @@ namespace ZakladOptyczny.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View("profile");
         }
 
         public IActionResult Privacy()
