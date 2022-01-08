@@ -22,7 +22,7 @@ namespace ZakladOptyczny.Controllers
             //var users = db.GetUsers();
             //db.AddTestUser();
 
-            return View("profile");
+            return View("visits");
         }
 
         public IActionResult Privacy()
