@@ -1,28 +1,27 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using ZakladOptyczny.Models;
-using ZakladOptyczny.Models.Utilities.Database;
+using ZakladOptyczny.Models.Utilities.Database.Appointments;
+using ZakladOptyczny.Models.Utilities.Database.Users;
 
 namespace ZakladOptyczny.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly DatabaseContext _databaseContext;
+        private readonly IUsersManager _usersManager;
+        private readonly IAppointmentManager _appointmentsManager;
 
-        public HomeController(ILogger<HomeController> logger, DatabaseContext databaseContext)
+        public HomeController(ILogger<HomeController> logger, IUsersManager usersManager, IAppointmentManager appointmentsManager)
         {
             _logger = logger;
-            _databaseContext = databaseContext;
+            _usersManager = usersManager;
+            _appointmentsManager = appointmentsManager;
         }
 
         public IActionResult Index()
         {
-            var db = new DatabaseManager(_databaseContext);
-            //var users = db.GetUsers();
-            //db.AddTestUser();
-
-            return View();
+            return View("termins");
         }
 
         public IActionResult Privacy()
