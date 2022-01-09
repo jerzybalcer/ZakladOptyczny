@@ -21,12 +21,27 @@ namespace ZakladOptyczny.Controllers
 
         public IActionResult Index()
         {
-            return View("visits");
+            return View("login");
         }
 
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        public IActionResult StronaGlowna()
+        {
+            return View("login");
+        }
+
+        public IActionResult Profil()
+        {
+            return View("profile");
+        }
+
+        public IActionResult Wizyty()
+        {
+            return View("visits");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
