@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - ZakladOptyczny</title>
+    <title>ZakladOptyczny - @ViewData["Title"]</title>
 
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ZakladOptyczny.styles.css" asp-append-version="true" />
@@ -79,38 +79,26 @@
     <div class="sidebar" style="width: 280px;">
         <a href="/" class="sidebarTitle">
             <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
-            <span class="fs-4">Sidebar</span>
+            <span class="fs-4">Zaklad Optyczny</span>
         </a>
         <hr>
         <ul class="optionsList">
         <li>
-            <a href="#" class="nav-item active">
+            <a href="/Home/StronaGlowna" class="nav-item active">
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
-                Home
+                Strona Glowna
             </a>
         </li>
         <li>
-            <a href="#" class="nav-item">
+            <a href="/Home/Profil" class="nav-item">
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
-                Dashboard
+                Profil
             </a>
         </li>
         <li>
-            <a href="#" class="nav-item">
+            <a href="/Home/Wizyty" class="nav-item">
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
-                Orders
-            </a>
-        </li>
-        <li>
-            <a href="#" class="nav-item">
-                <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
-                Products
-            </a>
-        </li>
-        <li>
-            <a href="#" class="nav-item">
-                <svg class="bi me-2" width="16" height="16"><use xlink:href="#people-circle"/></svg>
-                Customers
+                Wizyty
             </a>
         </li>
         </ul>
