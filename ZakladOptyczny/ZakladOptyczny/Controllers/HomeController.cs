@@ -41,6 +41,8 @@ namespace ZakladOptyczny.Controllers
 
         public IActionResult Wizyty()
         {
+            var apps = _appointmentsManager.GetAllAppointments();
+            ViewBag.Apps = apps;
             return View("visits");
         }
 

@@ -2,16 +2,28 @@
 
     ViewData["Title"] = "Wizyty";
 }
-
+@{
+    var apps = ViewBag.Apps;
+}
 <div class="content">
     <h1 class= "title">Historia wizyt</h1>
     <table>
         <tr>
-            <th>Data</th>
+            <th>Id</th>
             <th>Data</th>
             <th>Akcje</th>
         </tr>
-        <tr>
+
+        @foreach(var app in apps)
+        {
+            <tr>
+            <td> @app.AppointmentId </td>
+            <td> @app.Date </td>
+            <td> <button class = "button">więcej informacji </button> </td>
+            </tr>
+            
+        }
+        @*<tr>
             <td> test </td>
             <td> test </td>
             <td> <button class = "button">więcej informacji</button> </td>
@@ -40,7 +52,7 @@
             <td> test </td>
             <td> test </td>
             <td> <button class = "button">więcej informacji</button> </td>
-        </tr>
+        </tr>*@
 
     </table>
 </div>
