@@ -19,13 +19,6 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
 builder.Services.AddScoped<IAppointmentManager, AppointmentManager>();
 builder.Services.AddScoped<IUsersManager, UsersManager>();
 
-builder.Services.AddRazorPages();
-builder.Services.AddRazorPages().WithRazorPagesRoot("/Views/Home");
-builder.Services.AddMvc().AddRazorPagesOptions(options =>
-{
-    options.Conventions.AddPageRoute("/login", "");
-});
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -43,9 +36,9 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-//app.MapControllerRoute(
-//    name: "default",
-//    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.MapRazorPages();
 
