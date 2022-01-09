@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using ZakladOptyczny.Models;
 using ZakladOptyczny.Models.Utilities.Database.Appointments;
