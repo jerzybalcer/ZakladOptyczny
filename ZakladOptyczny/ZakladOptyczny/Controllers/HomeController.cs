@@ -1,4 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using ZakladOptyczny.Models;
 using ZakladOptyczny.Models.Utilities.Database.Appointments;
@@ -42,6 +46,35 @@ namespace ZakladOptyczny.Controllers
         public IActionResult Wizyty()
         {
             return View("visits");
+        }
+
+        public async Task GoogleLogin()
+        {
+            await HttpContext.ChallengeAsync(GoogleDefaults.AuthenticationScheme, new AuthenticationProperties()
+            {
+                RedirectUri = Url.Action("GoogleResponse")
+            });
+        }
+
+        public async Task<IActionResult> GoogleResponse()
+        {
+            var result = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            var claims = result.Principal.Identities
+                .FirstOrDefault().Claims.Select(claim => new
+                {
+                    claim.Issuer,
+                    claim.OriginalIssuer,
+                    claim.Type,
+                    claim.Value
+                });
+            //return Json(claims); <--  log in info in claims - empty txt html opens with this on
+            return RedirectToAction("StronaGlowna");
+        }
+
+        public async Task<IActionResult> GoogleLogout()
+        {
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("StronaGlowna");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
