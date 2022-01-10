@@ -4,6 +4,7 @@ using ZakladOptyczny.Models;
 using ZakladOptyczny.Models.Utilities.Database.Appointments;
 using ZakladOptyczny.Models.Utilities.Database.Users;
 
+
 namespace ZakladOptyczny.Controllers
 {
     public class HomeController : Controller
@@ -42,6 +43,13 @@ namespace ZakladOptyczny.Controllers
         public IActionResult Wizyty()
         {
             return View("visits");
+        }
+
+        public IActionResult Terminy(DateTime SearchDate)
+        {
+            var date = SearchDate.ToShortDateString();
+            ViewData["date"] = date;
+            return View("termins");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
