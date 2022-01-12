@@ -26,8 +26,8 @@ builder.Services.AddAuthentication(options =>
             .AddCookie()
             .AddGoogle(GoogleDefaults.AuthenticationScheme, options =>
             {
-                options.ClientId = "873675777253-vmv0h1vmfuilh717eodo76u028lah6j1.apps.googleusercontent.com";
-                options.ClientSecret = "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";
+                options.ClientId = "410992943637-0sou3flg89vk30ie2k4n59jthnmf62m0.apps.googleusercontent.com";
+                options.ClientSecret = "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";
                 options.ClaimActions.MapJsonKey("urn:google:picture", "picture", "url");
             });
 
