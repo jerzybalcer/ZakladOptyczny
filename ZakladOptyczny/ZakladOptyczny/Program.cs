@@ -2,43 +2,51 @@ using Microsoft.EntityFrameworkCore;
 using ZakladOptyczny.Models.Utilities.Database.Appointments;
 using ZakladOptyczny.Models.Utilities.Database;
 using ZakladOptyczny.Models.Utilities.Database.Users;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
 builder.Services.AddControllersWithViews();
 
-// register database context
 builder.Services.AddDbContext<DatabaseContext>(options =>
 {
-    // connection string in appsettings.json
     options.UseSqlServer(builder.Configuration.GetConnectionString("DatabaseContext"));
 });
 
-// services used to access database
 builder.Services.AddScoped<IAppointmentManager, AppointmentManager>();
 builder.Services.AddScoped<IUsersManager, UsersManager>();
 
+builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
+            })
+            .AddCookie()
+            .AddGoogle(GoogleDefaults.AuthenticationScheme, options =>
+            {
+                options.ClientId = "410992943637-0sou3flg89vk30ie2k4n59jthnmf62m0.apps.googleusercontent.com";
+                options.ClientSecret = "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";
+                options.ClaimActions.MapJsonKey("urn:google:picture", "picture", "url");
+            });
+
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
-
 app.UseAuthorization();
+app.UseAuthentication();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
-

@@ -2,49 +2,19 @@
     ViewData["Title"] = "Home Page";
 }
 
-
 <div class="content">
     <img class="logo" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
     <h1 class="title">Zakład optyczny</h1>
     <div class="sub-text">
-        <p class="text">Zaloguj się aby uzyskać dostęp do internetowego panelu pacjęta.</p>
-        <div id="my-signin2"/>
+        <p class="text">Zaloguj się aby uzyskać dostęp do internetowego panelu pacjenta.</p>
     </div>
+    @if (Context.User.Identity.IsAuthenticated)
+    {
+        <a>Hello @User.Identity.Name</a><br/>
+        <p><a asp-controller="Home" asp-action="GoogleLogout">Logout</a></p>
+    }
+    else
+    {
+        <p><a asp-controller="Home" asp-action="GoogleLogin">Login</a></p>
+    }
 </div>
-
-<a href="#" onclick="signOut();">Sign out</a>
-<script>
-  function signOut() {
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-      console.log('User signed out.');
-    });
-  }
-</script>
-
-<script>
-    function onSuccess(googleUser) {
-      console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
-      var profile = googleUser.getBasicProfile();
-      console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-      console.log('Name: ' + profile.getName());
-      console.log('Image URL: ' + profile.getImageUrl());
-      console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-    }
-    function onFailure(error) {
-      console.log(error);
-    }
-    function renderButton() {
-      gapi.signin2.render('my-signin2', {
-        'scope': 'profile email',
-        'width': 240,
-        'height': 50,
-        'longtitle': true,
-        'theme': 'dark',
-        'onsuccess': onSuccess,
-        'onfailure': onFailure
-      });
-    }
-  </script>
-
-  <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
