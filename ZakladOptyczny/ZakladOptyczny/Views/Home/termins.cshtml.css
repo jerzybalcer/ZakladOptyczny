@@ -1,0 +1,85 @@
+﻿td:first-child {
+    width: 20%;
+}
+
+td:nth-child(2){
+    width: 65%
+}
+td:last-child {
+    width: 15%;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2
+}
+
+th, td {
+    text-align: left;
+    padding: 10px;
+}
+
+th {
+    background-color: #0d6efd;
+    color: white;
+    text-decoration: double;
+}
+
+table {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: collapse;
+}
+
+.button {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    line-height: 1.5;
+    color: #212529;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    border: 1px solid transparent;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    color: #fff;
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+    border-radius: .3rem
+}
+
+.title{
+    text-align: center;
+    margin-top: 30px;
+    font-weight: 600;
+    font-size: 60px;
+}
+
+.form-content {
+    width: 70%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.date-form {
+   
+}
+
+.date-form button{
+    margin-left: 5px;
+}
+
+.date-form input {
+}
+
+.date-form label {
+    display: block;
+    margin-bottom:5px;
+    font-size: 25px;
+
+}

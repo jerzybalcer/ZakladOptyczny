@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ZakladOptyczny - @ViewData["Title"]</title>
+    <title>@ViewData["Title"] - ZakladOptyczny</title>
 
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ZakladOptyczny.styles.css" asp-append-version="true" />
@@ -82,7 +82,7 @@
         <hr>
         <ul class="optionsList">
         <li>
-            <a href="/Home/StronaGlowna" class="nav-item active">
+                <a href="/Home/StronaGlowna" class="nav-item active">
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
                 Strona Glowna
             </a>
@@ -97,6 +97,12 @@
             <a href="/Home/Wizyty" class="nav-item">
                 <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
                 Wizyty
+            </a>
+        </li>
+        <li>
+            <a href="/Home/Terminy" class="nav-item">
+                <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
+                Terminy
             </a>
         </li>
         </ul>
