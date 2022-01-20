@@ -10,7 +10,12 @@ namespace ZakladOptyczny.Models.Utilities.Database.Users
 
         public List<User> GetMatchingUsers(string searchPhrase);
 
-        public void AddUser(User user);
+        public List<User> GetMatchingUsersByFullName(string searchPhraseName,
+            string searchPhraseSurname);
+
+        public List<User> GetMatchingUsersByEmail(string searchPhraseName);
+
+        public User AddUser(User user);
 
         public void UpdateUser(User user);
 
