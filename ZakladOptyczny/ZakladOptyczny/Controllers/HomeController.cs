@@ -5,8 +5,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using ZakladOptyczny.Models;
+using ZakladOptyczny.Models.Actors;
 using ZakladOptyczny.Models.Utilities.Database.Appointments;
 using ZakladOptyczny.Models.Utilities.Database.Users;
+using System.Linq;
 
 
 namespace ZakladOptyczny.Controllers
@@ -16,6 +18,8 @@ namespace ZakladOptyczny.Controllers
         private readonly ILogger<HomeController> _logger;
         private readonly IUsersManager _usersManager;
         private readonly IAppointmentManager _appointmentsManager;
+
+        private User currentUser;
 
         public HomeController(ILogger<HomeController> logger, IUsersManager usersManager, IAppointmentManager appointmentsManager)
         {
@@ -36,11 +40,13 @@ namespace ZakladOptyczny.Controllers
 
         public IActionResult StronaGlowna()
         {
+            ViewBag.User = currentUser;
             return View("login");
         }
 
         public IActionResult Profil()
         {
+            ViewBag.User = currentUser;
             return View("profile");
         }
 
@@ -75,7 +81,24 @@ namespace ZakladOptyczny.Controllers
                     claim.Type,
                     claim.Value
                 });
-            //return Json(claims); <--  log in info in claims - empty txt html opens with this on
+
+            var claimsList = claims.ToArray();
+
+            var userCheckList = _usersManager.GetMatchingUsersByEmail(claimsList[4].Value);
+
+            if (userCheckList.Count == 0)
+            {
+
+                currentUser = _usersManager.AddUser(new Patient(claimsList[2].Value,
+                    claimsList[3].Value,
+                    "",
+                    claimsList[4].Value));
+            }
+            else
+            { 
+                currentUser = userCheckList[0];
+            }
+
             return RedirectToAction("StronaGlowna");
         }
 

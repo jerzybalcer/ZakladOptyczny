@@ -23,13 +23,28 @@ namespace ZakladOptyczny.Models.Utilities.Database.Users
 
         public List<User> GetMatchingUsers(string searchPhrase)
         {
-            return _db.Users.Where(user => user.Name.Contains(searchPhrase) || user.Surname.Contains(searchPhrase)).ToList();
+            return _db.Users.Where(user => user.Name.Contains(searchPhrase)
+            || user.Surname.Contains(searchPhrase)).ToList();
         }
 
-        public void AddUser(User user)
+        public List<User> GetMatchingUsersByFullName(string searchPhraseName,
+            string searchPhraseSurname)
+        {
+            return _db.Users.Where(user => user.Name.Contains(searchPhraseName)
+            && user.Surname.Contains(searchPhraseSurname)).ToList();
+        }
+
+        public List<User> GetMatchingUsersByEmail(string searchPhraseName)
+        {
+            return _db.Users.Where(user => user.Email.Contains(searchPhraseName)).ToList();
+        }
+
+        public User AddUser(User user)
         {
             _db.Users.Add(user);
             _db.SaveChanges();
+
+            return user;
         }
 
         public void UpdateUser(User user)

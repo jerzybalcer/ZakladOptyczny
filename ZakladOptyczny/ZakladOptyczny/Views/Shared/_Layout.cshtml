@@ -1,4 +1,6 @@
-﻿<!doctype html>
+﻿@model IEnumerable<System.Security.Claims.Claim>
+
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -79,38 +81,61 @@
             <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
             <span class="fs-4">Zaklad Optyczny</span>
         </a>
-        <hr>
-        <ul class="optionsList">
-        <li>
-                <a href="/Home/StronaGlowna" class="nav-item active">
-                <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
-                Strona Glowna
-            </a>
-        </li>
-        <li>
-            <a href="/Home/Profil" class="nav-item">
-                <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
-                Profil
-            </a>
-        </li>
-        <li>
-            <a href="/Home/Wizyty" class="nav-item">
-                <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
-                Wizyty
-            </a>
-        </li>
-        <li>
-            <a href="/Home/Terminy" class="nav-item">
-                <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
-                Terminy
-            </a>
-        </li>
-        </ul>
-        <hr>
-        <div class="sidebar-footer">
-            <img src="https://i.imgur.com/q52cLwE.png" alt="" width="32" height="32" class="accountPic">
-            <div class="user-info">Nie zalogowano!</div>
-        </div>
+        @if (Context.User.Identity.IsAuthenticated)
+        {
+            <hr>
+            <ul class="optionsList">
+                <li>
+                        <a href="/Home/StronaGlowna" class="nav-item">
+                        <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
+                        Strona Glowna
+                    </a>
+                </li>
+                <li>
+                    <a href="/Home/Profil" class="nav-item">
+                        <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"/></svg>
+                        Profil
+                    </a>
+                </li>
+                <li>
+                    <a href="/Home/Wizyty" class="nav-item">
+                        <svg class="bi me-2" width="16" height="16"><use xlink:href="#table"/></svg>
+                        Wizyty
+                    </a>
+                </li>
+                <li>
+                    <a href="/Home/Terminy" class="nav-item">
+                        <svg class="bi me-2" width="16" height="16"><use xlink:href="#grid"/></svg>
+                        Terminy
+                    </a>
+                </li>
+            </ul>
+            <hr>
+        }
+        else
+        {
+            <hr>
+            <ul class="optionsList">
+            <li>
+                    <a href="/Home/StronaGlowna" class="nav-item">
+                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"/></svg>
+                    Strona Glowna
+                </a>
+            </li>
+            </ul>
+        }
+        @if (Context.User.Identity.IsAuthenticated)
+        {
+            <div class="sidebar-footer">
+                <div >Witaj, @User.Identity.Name!<br/></div>
+            </div>
+        }
+        else
+        {
+            <div class="sidebar-footer">
+                <div class="user-info">Nie zalogowano!</div>
+            </div>
+        }
     </div>
 
     <div class="main-Content">
