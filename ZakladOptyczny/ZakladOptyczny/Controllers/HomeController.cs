@@ -19,8 +19,6 @@ namespace ZakladOptyczny.Controllers
         private readonly IUsersManager _usersManager;
         private readonly IAppointmentManager _appointmentsManager;
 
-        private User currentUser;
-
         public HomeController(ILogger<HomeController> logger, IUsersManager usersManager, IAppointmentManager appointmentsManager)
         {
             _logger = logger;
@@ -40,18 +38,18 @@ namespace ZakladOptyczny.Controllers
 
         public IActionResult StronaGlowna()
         {
-            ViewBag.User = currentUser;
             return View("login");
         }
 
         public IActionResult Profil()
         {
-            ViewBag.User = currentUser;
             return View("profile");
         }
 
         public IActionResult Wizyty()
         {
+            var apps = _appointmentsManager.GetAllAppointments();
+            ViewBag.Apps = apps;
             return View("visits");
         }
 
@@ -89,14 +87,14 @@ namespace ZakladOptyczny.Controllers
             if (userCheckList.Count == 0)
             {
 
-                currentUser = _usersManager.AddUser(new Patient(claimsList[2].Value,
+                _usersManager.AddUser(new Patient(claimsList[2].Value,
                     claimsList[3].Value,
                     "",
                     claimsList[4].Value));
             }
             else
             { 
-                currentUser = userCheckList[0];
+                //currentUser = userCheckList[0];
             }
 
             return RedirectToAction("StronaGlowna");

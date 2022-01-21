@@ -7,7 +7,7 @@
     <div class="sub-text">
         <p class="text">Zaloguj się aby uzyskać dostęp do internetowego panelu pacjenta.</p>
     </div>
-    @if (Context.User.Identity.IsAuthenticated)
+    @if(Context.User.Identity.IsAuthenticated)
     {
         <a>Hello @User.Identity.Name</a><br/>
         <p><a asp-controller="Home" asp-action="GoogleLogout">Logout</a></p>

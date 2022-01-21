@@ -28,6 +28,8 @@ builder.Services.AddAuthentication(options =>
             {
                 options.ClientId = "96433081251-n3gafb9c592ch92uujkv2jd3h80rverd.apps.googleusercontent.com";
                 options.ClientSecret = "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";
+                //options.ClientId = "410992943637-0sou3flg89vk30ie2k4n59jthnmf62m0.apps.googleusercontent.com";
+                //options.ClientSecret = "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"; <-- jerzy logon for azure
                 options.ClaimActions.MapJsonKey("urn:google:picture", "picture", "url");
             });
 
