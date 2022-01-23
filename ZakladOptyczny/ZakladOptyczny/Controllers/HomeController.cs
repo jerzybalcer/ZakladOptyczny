@@ -81,7 +81,8 @@ namespace ZakladOptyczny.Controllers
                 }
                 else if (user is ZakladOptyczny.Models.Actors.Receptionist)
                 {
-                    return UmowRejestrator(date);
+                    ViewBag.Date = date;
+                    return View("selectUser");
                 }
                 else
                 {
@@ -97,10 +98,13 @@ namespace ZakladOptyczny.Controllers
             return View("login");
         }
 
-        public IActionResult UmowRejestrator(DateTime date)
+        public IActionResult UmowRejestrator(DateTime date, string mail)
         {
-
-            return View("login");
+            var user = _usersManager.GetMatchingUsersByEmail(mail)[0];
+            if(user != null)
+                return UmowPacjent(date, user);
+            else
+                return View("error");
         }
 
         public IActionResult ProfileUpdate(string NewName, string NewSurname, string NewEmail, string NewPesel)
