@@ -1,31 +1,38 @@
 @{
     ViewData["Title"] = "Profil";
 }
+
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
 <div class="content">
         <h1 class="mb-3">Twoje dane</h1>
-        <form class="needs-validation" novalidate>
+        <form class="needs-validation" novalidate action="ProfileUpdate">
           <div class="rows">
             <div class="form-element">
               <label class="form-label">Imię</label>
-              <input type="text" class="form-control" placeholder="Imie">
+              <input name = "NewName" type="text" class="form-control" 
+                placeholder="@Html.Raw(HttpContextAccessor.HttpContext.Request.Cookies["opticianpractice_current-user-name"])">
             </div>
 
             <div class="form-element">
               <label class="form-label">Nazwisko</label>
-              <input type="text" class="form-control" placeholder="Nazwisko">
+              <input name = "NewSurname"type="text" class="form-control" 
+                placeholder="@Html.Raw(HttpContextAccessor.HttpContext.Request.Cookies["opticianpractice_current-user-surname"])">
             </div>
 
             <div class="form-element">
               <label class="form-label">Adres email</label>
-              <input type="email" class="form-control" placeholder="nazwa@mail.com">
+              <input name = "NewEmail" type="email" class="form-control" 
+                placeholder="@Html.Raw(HttpContextAccessor.HttpContext.Request.Cookies["opticianpractice_current-user-email"])">
             </div>
 
             <div class="form-element">
               <label for="address" class="form-label">Pesel</label>
-              <input type="number" class="form-control" placeholder="XXXXXXXXXXX">
+              <input name = "NewPesel"type="number" class="form-control" 
+                placeholder="@Html.Raw(HttpContextAccessor.HttpContext.Request.Cookies["opticianpractice_current-user-pesel"])">
             </div>
-
           </div>
+
           <button class="form-button" type="submit">Zapisz dane</button>
         </form>
       </div>

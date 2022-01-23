@@ -15,6 +15,8 @@ builder.Services.AddDbContext<DatabaseContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DatabaseContext"));
 });
 
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
 builder.Services.AddScoped<IAppointmentManager, AppointmentManager>();
 builder.Services.AddScoped<IUsersManager, UsersManager>();
 
