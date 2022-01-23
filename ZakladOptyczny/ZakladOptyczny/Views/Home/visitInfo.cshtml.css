@@ -1,0 +1,10 @@
+﻿.content {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+label {
+    font-size: 20px;
+    font-weight: 600;
+}
