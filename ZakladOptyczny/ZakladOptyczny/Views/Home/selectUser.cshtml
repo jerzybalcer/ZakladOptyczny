@@ -1,0 +1,16 @@
+﻿@{
+    ViewData["Title"] = "Wybierz użytkownika";
+    var date = ViewBag.Date;
+}
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+<div class="content">
+    <h1 class= "title">Znajdź pacjenta</h1>
+        <div class="form-element">
+            @using(Html.BeginForm("UmowRejestrator", "Home", new{date = date}))
+            {
+              <label class="form-label">Mail</label>
+              <input name = "mail" type="text" class="form-control" >
+              <input type="submit", value = "Szukaj">
+            }
+        </div>
+</div>

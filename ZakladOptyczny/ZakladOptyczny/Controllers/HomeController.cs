@@ -118,11 +118,61 @@ namespace ZakladOptyczny.Controllers
             _appointmentsManager.UpdateAppointment(updated);
             return OptInfo(updated.AppointmentId);
         }
+        
         public IActionResult Terminy(DateTime SearchDate)
         {
-            var date = SearchDate.ToShortDateString();
-            ViewData["date"] = date;
+            var date = SearchDate;
+            var apps = _appointmentsManager.GetAllAppointments();
+            var hour = new List<DateTime>();
+            if (SearchDate < DateTime.Today) date = DateTime.Today;
+            foreach (var app in apps)
+            {
+                if (app.Date.Date.Equals(date.Date))
+                    hour.Add(app.Date);            
+            }
+            ViewBag.Date = date.ToShortDateString();
+            ViewBag.Hours = hour;
+            
             return View("termins");
+        }
+
+        public IActionResult WhatUser(string data, int godzina)
+        {
+            string d = data + " " + godzina.ToString() +":00:00";
+            if (DateTime.TryParse(d, out DateTime date))
+            {
+                string tempCookieValue = HttpContext.Request.Cookies["opticianpractice_current-user-email"];
+                User user = _usersManager.GetMatchingUsersByEmail(tempCookieValue)[0];
+                if (user is ZakladOptyczny.Models.Actors.Patient)
+                {
+                    return UmowPacjent(date, user);
+                }
+                else if (user is ZakladOptyczny.Models.Actors.Receptionist)
+                {
+                    ViewBag.Date = date;
+                    return View("selectUser");
+                }
+                else
+                {
+                    return View("termins");
+                }
+            }
+            else return View("error");
+        }
+
+        public IActionResult UmowPacjent(DateTime date, User user)
+        {
+            _appointmentsManager.MakeAppointment(date, user);
+            return View("login");
+        }
+
+        public IActionResult UmowRejestrator(DateTime date, string mail)
+        {
+            var user = _usersManager.GetMatchingUsersByEmail(mail)[0];
+            if(user != null)
+                return UmowPacjent(date, user);
+            else
+                return View("error");
         }
 
         public IActionResult ProfileUpdate(string NewName, string NewSurname, string NewEmail, string NewPesel)
