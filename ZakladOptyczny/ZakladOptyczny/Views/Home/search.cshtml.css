@@ -1,42 +1,61 @@
-﻿td:first-child {
-    width: 20%;
-}
-
-td:nth-child(2){
-    width: 65%
-}
-td:last-child {
-    width: 15%;
-}
-
-tr:nth-child(even) {
-    background-color: #f2f2f2
-}
-
-th, td {
-    text-align: left;
-    padding: 10px;
-}
-
-th {
-    background-color: #0d6efd;
-    color: white;
-    text-decoration: double;
-}
-
-table {
-    width: 70%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 5%;
-    border-collapse: collapse;
-}
-
-.button {
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
+﻿.content {
     display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+    
+}
+
+
+h1 {
+    text-align: center;
+    margin-top: 30px;
+    font-weight: 600;
+    font-size: 60px;
+}
+
+.form-control {
+    display: block;
+    width: 100%;
+    padding: 0 !important;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out
+}
+
+    .form-control:focus {
+        color: #212529;
+        background-color: #fff;
+        border-color: #86b7fe;
+        outline: 0;
+        box-shadow: 0 0 0 .25rem rgba(13,110,253,.25)
+    }
+
+.form-element {
+    flex: 0 0 auto;
+    width: 50%;
+    padding: 0px 8px;
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-button {
+    width: 30%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 15px;
+    display: block;
+    font-weight: 400;
     line-height: 1.5;
     color: #212529;
     text-align: center;
@@ -46,17 +65,27 @@ table {
     -webkit-user-select: none;
     -moz-user-select: none;
     user-select: none;
+    background-color: transparent;
     border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    border-radius: .25rem;
     transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
     color: #fff;
     background-color: #0d6efd;
     border-color: #0d6efd;
+    padding: .5rem 1rem;
+    font-size: 1.25rem;
     border-radius: .3rem
 }
 
-.title{
-    text-align: center;
-    margin-top: 30px;
+    .form-button:hover {
+        color: #fff;
+        background-color: #0b5ed7;
+        border-color: #0a58ca
+    }
+
+label {
+    font-size: 20px;
     font-weight: 600;
-    font-size: 60px;
 }

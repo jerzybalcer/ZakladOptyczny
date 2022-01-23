@@ -6,7 +6,7 @@
     var name = ViewBag.UserName;
 }
 <div class = "content">
-    <h1 class= "title">Szczegóły wizyty</h1>
+    <h1>Szczegóły wizyty</h1>
     <br/><br/>
 
     <label>Imię i Nazwisko</label>
@@ -18,20 +18,20 @@
         <label>Data wizyty</label>
         <br/>
         <input name = "date" type="datetime" class="form-control" value = "@app.Date" readonly>
-        <br/><br/>
+        <br/>
         <label>ID wizyty</label>
         <br/>
         <input name = "id" type="number" class="form-control" value = "@app.AppointmentId" readonly>
-        <br/><br/>
+        <br/>
         <label>Notatka</label>
         <br/>
         <input name = "note" type="text" class="form-control" value = "@app.Note">
-        <br/><br/>
+        <br/>
         <label>Recepta</label>
         <br/>
         <input name = "presc" type="text" class="form-control" value = "@app.Prescription">
-        <br/><br/>
-        <label>Czy wizyta się odbyła (wpisz Tak lub Nie)?</label>
+        <br/>
+        <label >Czy wizyta się odbyła (wpisz Tak lub Nie)?</label>
         <br/>
         if(app.IsAttended == true)
         {
@@ -47,7 +47,7 @@
         }
         
         <br/><br/>
-        <input type="submit", value = "Update">
+        <button class="form-button" type="submit">Aktualizuj</button>
     }
 
     
