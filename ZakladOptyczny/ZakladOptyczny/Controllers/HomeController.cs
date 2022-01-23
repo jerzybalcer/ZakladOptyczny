@@ -52,8 +52,17 @@ namespace ZakladOptyczny.Controllers
 
         public IActionResult Terminy(DateTime SearchDate)
         {
-            var date = SearchDate.ToShortDateString();
-            ViewData["date"] = date;
+            var date = SearchDate;
+            var apps = _appointmentsManager.GetAllAppointments();
+            var hour = new List<DateTime>();
+            if (SearchDate < DateTime.Today) date = DateTime.Today;
+            foreach (var app in apps)
+            {
+                if (app.Date.Date.Equals(date.Date))
+                    hour.Add(app.Date);            
+            }
+            ViewBag.Date = date.ToShortDateString();
+            ViewBag.Hours = hour;
             return View("termins");
         }
 

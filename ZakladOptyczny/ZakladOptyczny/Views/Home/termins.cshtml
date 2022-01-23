@@ -2,6 +2,11 @@
     ViewData["Title"] = "Terminy";  
 }
 
+@{
+    var hours = ViewBag.Hours;
+    var date = ViewBag.Date;  
+}
+
 <div class="content">
     <h1 class= "title">Umów się na wizytę</h1>
     <div class= "form-content">
@@ -18,50 +23,17 @@
             <th>Godzina</th>
             <th>Akcje</th>
         </tr>
-        <tr>       
-            <td>@ViewData["date"]</td>
-            <td>8:00</td>
-            <td> <button class = "button">umów</button> </td>
-        </tr>
-        <tr>
-            <td>@ViewData["date"]</td>
-            <td>9:00</td>
-            <td> <button class = "button">umów</button> </td>
-        </tr>
-        <tr>    
-            <td>@ViewData["date"]</td>
-            <td>10:00</td>
-            <td> <button class = "button">umów</button> </td>
-        </tr>
-        <tr>    
-            <td>@ViewData["date"]</td>
-            <td>11:00</td>
-            <td> <button class = "button">umów</button> </td>
-        </tr>
-        <tr>    
-            <td>@ViewData["date"]</td>
-            <td>12:00</td>
-            <td> <button class = "button">umów</button> </td>
-        </tr>
-        <tr>    
-            <td>@ViewData["date"]</td>
-            <td>13:00</td>
-            <td> <button class = "button">umów</button> </td>
-        </tr>
-        <tr>    
-            <td>@ViewData["date"]</td>
-            <td>14:00</td>
-            <td> <button class = "button">umów</button> </td>
-        </tr>
-        <tr>    
-            <td>@ViewData["date"]</td>
-            <td>15:00</td>
-            <td> <button class = "button">umów</button> </td>
-        </tr>
-        <tr>    
-            <td>@ViewData["date"]</td>
-            <td>16:00</td>
-            <td> <button class = "button">umów</button> </td>
-        </tr>
+           
+            @for (int i = 8; i<16;i++)
+            {
+                foreach(DateTime h in hours)       
+                    if(h.Hour == i)     
+                        i++;
+                <tr>
+                    <td> @date </td>
+                    <td> @i:00 </td>
+                    <td> <button class = "button">umów</button> </td>   
+                </tr>
+            }
     </table>        
 </div>
