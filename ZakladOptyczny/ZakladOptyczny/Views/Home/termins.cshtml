@@ -24,7 +24,7 @@
             <th>Akcje</th>
         </tr>
            
-            @for (int i = 8; i<16;i++)
+            @for (int i = 8; i<16; i++)
             {
                 foreach(DateTime h in hours)       
                     if(h.Hour == i)     
@@ -32,7 +32,7 @@
                 <tr>
                     <td> @date </td>
                     <td> @i:00 </td>
-                    <td> <button class = "button">umów</button> </td>   
+                    <td> <input type="button", value="Umów", onclick="location.href='@Url.Action("WhatUser", "Home", new {data = date, godzina = i})'"> </td>
                 </tr>
             }
     </table>        

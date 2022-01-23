@@ -50,6 +50,7 @@ namespace ZakladOptyczny.Controllers
             return View("visits");
         }
 
+
         public IActionResult Terminy(DateTime SearchDate)
         {
             var date = SearchDate;
@@ -63,7 +64,43 @@ namespace ZakladOptyczny.Controllers
             }
             ViewBag.Date = date.ToShortDateString();
             ViewBag.Hours = hour;
+            
             return View("termins");
+        }
+
+        public IActionResult WhatUser(string data, int godzina)
+        {
+            string d = data + " " + godzina.ToString() +":00:00";
+            if (DateTime.TryParse(d, out DateTime date))
+            {
+                string tempCookieValue = HttpContext.Request.Cookies["opticianpractice_current-user-email"];
+                User user = _usersManager.GetMatchingUsersByEmail(tempCookieValue)[0];
+                if (user is ZakladOptyczny.Models.Actors.Patient)
+                {
+                    return UmowPacjent(date, user);
+                }
+                else if (user is ZakladOptyczny.Models.Actors.Receptionist)
+                {
+                    return UmowRejestrator(date);
+                }
+                else
+                {
+                    return View("termins");
+                }
+            }
+            else return View("error");
+        }
+
+        public IActionResult UmowPacjent(DateTime date, User user)
+        {
+            _appointmentsManager.MakeAppointment(date, user);
+            return View("login");
+        }
+
+        public IActionResult UmowRejestrator(DateTime date)
+        {
+
+            return View("login");
         }
 
         public IActionResult ProfileUpdate(string NewName, string NewSurname, string NewEmail, string NewPesel)
