@@ -1,0 +1,80 @@
+﻿@{
+    ViewData["Title"] = "Info";
+}
+@{
+    var app = ViewBag.App;
+    var name = ViewBag.UserName;
+}
+<div class = "content">
+    <h1 class= "title">Szczegóły wizyty</h1>
+    <br/><br/>
+
+    <label>Imię i Nazwisko</label>
+    <br/>
+    <a class = "name"> @name </a>
+    <br/><br/>
+
+    <label>Data wizyty</label>
+    <br/>
+    <a class = "date"> @app.Date</a>
+    <br/><br/>
+
+    <label>Recepta</label>
+    <br/>
+        @{
+            if(app.Prescription == null)
+            {
+                <div>
+                <a></a>
+                </div>
+            }
+            else
+            {
+                <div>
+                <a>@app.Prescription</a>
+                </div>
+            }
+        }
+     <br/><br/>
+
+    <label>Notatka</label>
+    <br/>
+        @{
+        if(app.Note == null)
+            {
+                <div>
+                <a></a>
+                </div>
+            }
+            else
+            {
+                <div>
+                <a>@app.Note</a>
+                </div>
+            }
+       }
+       <br/><br/>
+
+        <label>Czy wizyta się odbyła?</label>
+        <br/>
+        @{
+        if(app.IsAttended == true)
+            {
+                <div>
+                <a>Tak</a>
+                </div>
+            }
+         else if(app.IsAttended == false)
+            {
+                <div>
+                <a>Nie</a>
+                </div>
+            }
+        else
+        {
+                <div>
+                <a></a>
+                </div>
+        }
+    }
+</div>

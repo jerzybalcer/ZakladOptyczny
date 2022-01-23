@@ -18,7 +18,7 @@
             <tr>
             <td> @app.AppointmentId </td>
             <td> @app.Date </td>
-            <td> <button class = "button">Więcej informacji </button> </td>
+            <td> <input type="button", value="Więcej informacji", onclick="location.href='@Url.Action("Check", "Home", new {appID = app.AppointmentId})'"> </td>
             </tr>
         }
     </table>

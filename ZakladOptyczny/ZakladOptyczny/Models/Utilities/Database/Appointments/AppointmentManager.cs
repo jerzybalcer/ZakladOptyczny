@@ -1,4 +1,5 @@
-﻿using ZakladOptyczny.Models.Actors;
+﻿using Microsoft.EntityFrameworkCore;
+using ZakladOptyczny.Models.Actors;
 
 namespace ZakladOptyczny.Models.Utilities.Database.Appointments
 {
@@ -13,17 +14,17 @@ namespace ZakladOptyczny.Models.Utilities.Database.Appointments
 
         public List<Appointment> GetAllAppointments()
         {
-            return _db.Appointments.ToList();
+            return _db.Appointments.AsNoTracking().Include("User").Include("User").ToList();
         }
 
         public List<Appointment> GetUserAppointments(User user)
         {
-            return _db.Appointments.Where(a => a.User == user).ToList();
+            return _db.Appointments.AsNoTracking().Include("User").Where(a => a.User == user).ToList();
         }
 
         public Appointment? GetAppointmentById(int id)
         {
-            return _db.Appointments.FirstOrDefault(a => a.AppointmentId == id);
+            return _db.Appointments.AsNoTracking().Include("User").FirstOrDefault(a => a.AppointmentId == id);
         }
 
         public Appointment MakeAppointment(DateTime date, User user)
