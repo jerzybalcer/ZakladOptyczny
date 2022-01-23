@@ -155,17 +155,27 @@ namespace ZakladOptyczny.Controllers
 
             option.Expires = DateTime.Now.AddMinutes(30);
 
-            Response.Cookies.Append("opticianpractice_current-user-name", u1.Name, option);
-            Response.Cookies.Append("opticianpractice_current-user-surname", u1.Surname, option);
-            Response.Cookies.Append("opticianpractice_current-user-pesel", u1.Pesel, option);
-            Response.Cookies.Append("opticianpractice_current-user-email", u1.Email, option);
+            Response.Cookies.Append("opticianpractice_current-user-name",
+                u1.Name, option);
+            Response.Cookies.Append("opticianpractice_current-user-surname",
+                u1.Surname, option);
+            Response.Cookies.Append("opticianpractice_current-user-pesel",
+                u1.Pesel, option);
+            Response.Cookies.Append("opticianpractice_current-user-email",
+                u1.Email, option);
 
             return RedirectToAction("StronaGlowna");
         }
 
         public async Task<IActionResult> GoogleLogout()
         {
+            Response.Cookies.Delete("opticianpractice_current-user-name");
+            Response.Cookies.Delete("opticianpractice_current-user-surname");
+            Response.Cookies.Delete("opticianpractice_current-user-pesel");
+            Response.Cookies.Delete("opticianpractice_current-user-email");
+
             await HttpContext.SignOutAsync();
+
             return RedirectToAction("StronaGlowna");
         }
 
