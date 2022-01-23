@@ -1,15 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.Google;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using ZakladOptyczny.Models;
 using ZakladOptyczny.Models.Actors;
 using ZakladOptyczny.Models.Utilities.Database.Appointments;
 using ZakladOptyczny.Models.Utilities.Database.Users;
-using System.Linq;
-
 
 namespace ZakladOptyczny.Controllers
 {
@@ -53,11 +50,67 @@ namespace ZakladOptyczny.Controllers
             return View("visits");
         }
 
-         public IActionResult Terminy(DateTime SearchDate)
+        public IActionResult Terminy(DateTime SearchDate)
         {
             var date = SearchDate.ToShortDateString();
             ViewData["date"] = date;
             return View("termins");
+        }
+
+        public IActionResult ProfileUpdate(string NewName, string NewSurname, string NewEmail, string NewPesel)
+        {
+            string tempCookieValue = HttpContext.Request.Cookies["opticianpractice_current-user-email"];
+            
+            User newUser, 
+                oldUser = _usersManager.GetMatchingUsersByEmail(tempCookieValue)[0];
+
+            CookieOptions option = new CookieOptions();
+            option.Expires = DateTime.Now.AddMinutes(30);
+
+            if (oldUser is ZakladOptyczny.Models.Actors.Patient)
+            {
+                newUser = new Patient("", "", "", "");
+            }
+            else if (oldUser is ZakladOptyczny.Models.Actors.Optician)
+            {
+                newUser = new Optician("", "", "", "");
+            }
+            else if (oldUser is ZakladOptyczny.Models.Actors.Receptionist)
+            {
+                newUser = new Receptionist("", "", "", "");
+            }
+            else
+            {
+                newUser = new Patient("","","","");
+            }
+
+            if (NewName != null)
+            {
+                oldUser.Name = NewName;
+                Response.Cookies.Delete("opticianpractice_current-user-name");
+                Response.Cookies.Append("opticianpractice_current-user-name", NewName, option);
+            }
+            if (NewSurname != null)
+            {
+                oldUser.Surname = NewSurname;
+                Response.Cookies.Delete("opticianpractice_current-user-surname");
+                Response.Cookies.Append("opticianpractice_current-user-surname", NewSurname, option);
+            }
+            if (NewEmail != null)
+            {
+                oldUser.Email = NewEmail;
+                Response.Cookies.Delete("opticianpractice_current-user-email");
+                Response.Cookies.Append("opticianpractice_current-user-email", NewEmail, option);
+            }
+            if (NewPesel != null)
+            {
+                oldUser.Pesel = NewPesel;
+                Response.Cookies.Delete("opticianpractice_current-user-pesel");
+                Response.Cookies.Append("opticianpractice_current-user-pesel", NewPesel, option);
+            }
+
+            _usersManager.UpdateUser(oldUser);
+            return View("profile");
         }
 
         public async Task GoogleLogin()
@@ -70,6 +123,8 @@ namespace ZakladOptyczny.Controllers
 
         public async Task<IActionResult> GoogleResponse()
         {
+            User u1;
+
             var result = await HttpContext.AuthenticateAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             var claims = result.Principal.Identities
                 .FirstOrDefault().Claims.Select(claim => new
@@ -86,16 +141,24 @@ namespace ZakladOptyczny.Controllers
 
             if (userCheckList.Count == 0)
             {
-
-                _usersManager.AddUser(new Patient(claimsList[2].Value,
+                u1 = _usersManager.AddUser(new Patient(claimsList[2].Value,
                     claimsList[3].Value,
                     "",
                     claimsList[4].Value));
             }
             else
             { 
-                //currentUser = userCheckList[0];
+                u1 = userCheckList[0];
             }
+            
+            CookieOptions option = new CookieOptions();
+
+            option.Expires = DateTime.Now.AddMinutes(30);
+
+            Response.Cookies.Append("opticianpractice_current-user-name", u1.Name, option);
+            Response.Cookies.Append("opticianpractice_current-user-surname", u1.Surname, option);
+            Response.Cookies.Append("opticianpractice_current-user-pesel", u1.Pesel, option);
+            Response.Cookies.Append("opticianpractice_current-user-email", u1.Email, option);
 
             return RedirectToAction("StronaGlowna");
         }
