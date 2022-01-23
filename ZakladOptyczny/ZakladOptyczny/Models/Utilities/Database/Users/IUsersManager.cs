@@ -15,6 +15,8 @@ namespace ZakladOptyczny.Models.Utilities.Database.Users
 
         public List<User> GetMatchingUsersByEmail(string searchPhraseName);
 
+        public User? GetUserByPesel(string pesel);
+
         public User AddUser(User user);
 
         public void UpdateUser(User user);
