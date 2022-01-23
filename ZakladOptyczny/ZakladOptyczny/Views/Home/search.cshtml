@@ -1,0 +1,15 @@
+@{
+    ViewData["Title"] = "Search";
+}
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+<div class="content">
+    <h1 class= "title">Znajdź pacjenta</h1>
+        <div class="form-element">
+            @using(Html.BeginForm("Szukaj", "Home"))
+            {
+              <label class="form-label">Pesel</label>
+              <input name = "pesel" type="text" class="form-control" >
+              <input type="submit", value = "Szukaj">
+            }
+        </div>
+</div>

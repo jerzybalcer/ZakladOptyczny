@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using ZakladOptyczny.Models;
 using ZakladOptyczny.Models.Actors;
+using ZakladOptyczny.Models.Utilities;
 using ZakladOptyczny.Models.Utilities.Database.Appointments;
 using ZakladOptyczny.Models.Utilities.Database.Users;
 
@@ -43,13 +44,80 @@ namespace ZakladOptyczny.Controllers
             return View("profile");
         }
 
-        public IActionResult Wizyty()
+        public IActionResult Search()
         {
-            var apps = _appointmentsManager.GetAllAppointments();
+            string tempCookieValue = HttpContext.Request.Cookies["opticianpractice_current-user-email"];
+            User us = _usersManager.GetMatchingUsersByEmail(tempCookieValue)[0];
+            if (us is ZakladOptyczny.Models.Actors.Patient)
+            {
+                return Wizyty(us.UserId);
+            }
+            else
+            {
+                return View("search");
+            }
+        }
+        [HttpPost]
+        public IActionResult Szukaj(String pesel)
+        {
+            User us = _usersManager.GetUserByPesel(pesel);
+            if (us == null)
+                return Search();
+            else
+                return Wizyty(us.UserId);
+        }
+
+        public IActionResult Wizyty(int userID)
+        {
+            var apps = _appointmentsManager.GetUserAppointments(_usersManager.GetUserById(userID));
             ViewBag.Apps = apps;
             return View("visits");
         }
+        public IActionResult Check(int appID)
+        {
+            string tempCookieValue = HttpContext.Request.Cookies["opticianpractice_current-user-email"];
+            User us = _usersManager.GetMatchingUsersByEmail(tempCookieValue)[0];
+            if (us is ZakladOptyczny.Models.Actors.Optician)
+            {
+                return OptInfo(appID);
+            }
+            else
+            {
+                return Info(appID);
+            }
 
+        }
+        public IActionResult Info(int appID)
+        {
+            var app = _appointmentsManager.GetAppointmentById(appID);
+            var name = app.User.Name + " " + app.User.Surname;
+            ViewBag.App = app;
+            ViewBag.UserName = name;
+            return View("visitInfo");
+        }
+
+        public IActionResult OptInfo(int appID)
+        {
+            var app = _appointmentsManager.GetAppointmentById(appID);
+            var name = app.User.Name + " " + app.User.Surname;
+            ViewBag.App = app;
+            ViewBag.UserName = name;
+            return View("optInfo");
+        }
+        [HttpPost]
+        public IActionResult Update(DateTime date, int id, string note, string presc, string isAtt, int appID)
+        {
+
+            bool isAttended;
+            if (isAtt == "Tak")
+                isAttended = true;
+            else
+                isAttended = false;
+            Appointment temp = _appointmentsManager.GetAppointmentById(id);
+            Appointment updated = new Appointment(id, presc, isAttended, note, date, temp.User);
+            _appointmentsManager.UpdateAppointment(updated);
+            return OptInfo(updated.AppointmentId);
+        }
         public IActionResult Terminy(DateTime SearchDate)
         {
             var date = SearchDate.ToShortDateString();

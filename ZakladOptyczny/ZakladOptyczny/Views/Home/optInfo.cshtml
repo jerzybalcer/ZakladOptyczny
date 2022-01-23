@@ -1,0 +1,54 @@
+﻿@{
+    ViewData["Title"] = "OptInfo";
+}
+@{
+    var app = ViewBag.App;
+    var name = ViewBag.UserName;
+}
+<div class = "content">
+    <h1 class= "title">Szczegóły wizyty</h1>
+    <br/><br/>
+
+    <label>Imię i Nazwisko</label>
+    <br/>
+    <a class = "name">@name</a>
+    <br/><br/>
+    @using(Html.BeginForm("Update", "Home"))
+    {
+        <label>Data wizyty</label>
+        <br/>
+        <input name = "date" type="datetime" class="form-control" value = "@app.Date" readonly>
+        <br/><br/>
+        <label>ID wizyty</label>
+        <br/>
+        <input name = "id" type="number" class="form-control" value = "@app.AppointmentId" readonly>
+        <br/><br/>
+        <label>Notatka</label>
+        <br/>
+        <input name = "note" type="text" class="form-control" value = "@app.Note">
+        <br/><br/>
+        <label>Recepta</label>
+        <br/>
+        <input name = "presc" type="text" class="form-control" value = "@app.Prescription">
+        <br/><br/>
+        <label>Czy wizyta się odbyła (wpisz Tak lub Nie)?</label>
+        <br/>
+        if(app.IsAttended == true)
+        {
+            <input name = "isAtt" type="text" class="form-control" value = "Tak">
+        }
+        else if(app.IsAttended == false)
+        {
+            <input name = "isAtt" type="text" class="form-control" value = "Nie">
+        }
+        else
+        {
+            <input name = "isAtt" type="text" class="form-control" value = "">
+        }
+        
+        <br/><br/>
+        <input type="submit", value = "Update">
+    }
+
+    
+</div>
