@@ -7,74 +7,71 @@
 }
 <div class = "content">
     <h1 class= "title">Szczegóły wizyty</h1>
-    <br/><br/>
 
-    <label>Imię i Nazwisko</label>
-    <br/>
-    <a class = "name"> @name </a>
-    <br/><br/>
+    <div class = "patient">
+        <label>Pacjent</label>
+        <br/>
+        <a class = "name"> @name </a>
+    </div>
 
-    <label>Data wizyty</label>
-    <br/>
-    <a class = "date"> @app.Date</a>
-    <br/><br/>
+    <div class = "date">
+        <label>Data wizyty</label>
+        <br/>
+        <a class = "date"> @app.Date</a>
+    </div>
 
-    <label>Recepta</label>
+    <div class = "taken">
+        <label>Odbyta</label>
+         <br/>
+        @{
+            if(app.IsAttended == true)
+            {
+                <a>✔️</a>
+            }
+            else if(app.IsAttended == false)
+            {
+                <a>❌</a>
+            }
+            else
+            {
+                <a></a>
+            }
+        }
+    </div>
     <br/>
+
+    <div class = "recept">
+        <label>Recepta</label>
+        <div class = "recept-content">
         @{
             if(app.Prescription == null)
             {
-                <div>
                 <a></a>
-                </div>
             }
             else
             {
-                <div>
                 <a>@app.Prescription</a>
-                </div>
             }
         }
-     <br/><br/>
+        </div>
+    </div>
 
-    <label>Notatka</label>
-    <br/>
+    <div class = "note">
+        <label>Notatka</label>
+        <div class = "note-content">
+
         @{
         if(app.Note == null)
             {
-                <div>
                 <a></a>
-                </div>
             }
             else
             {
-                <div>
                 <a>@app.Note</a>
-                </div>
             }
        }
-       <br/><br/>
+       </div>
+    </div>
 
-        <label>Czy wizyta się odbyła?</label>
-        <br/>
-        @{
-        if(app.IsAttended == true)
-            {
-                <div>
-                <a>Tak</a>
-                </div>
-            }
-         else if(app.IsAttended == false)
-            {
-                <div>
-                <a>Nie</a>
-                </div>
-            }
-        else
-        {
-                <div>
-                <a></a>
-                </div>
-        }
-    }
+    
 </div>

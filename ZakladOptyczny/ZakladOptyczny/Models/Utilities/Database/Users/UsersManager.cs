@@ -14,34 +14,34 @@ namespace ZakladOptyczny.Models.Utilities.Database.Users
 
         public List<User> GetAllUsers()
         {
-            return _db.Users.AsNoTracking().ToList();
+            return _db.Users.ToList();
         }
 
         public User? GetUserById(int id)
         {
-            return _db.Users.AsNoTracking().FirstOrDefault(user => user.UserId == id);
+            return _db.Users.FirstOrDefault(user => user.UserId == id);
         }
         public User? GetUserByPesel(string pesel)
         {
-            return _db.Users.AsNoTracking().FirstOrDefault(user => user.Pesel == pesel);
+            return _db.Users.FirstOrDefault(user => user.Pesel == pesel);
         }
 
         public List<User> GetMatchingUsers(string searchPhrase)
         {
-            return _db.Users.AsNoTracking().Where(user => user.Name.Contains(searchPhrase)
+            return _db.Users.Where(user => user.Name.Contains(searchPhrase)
             || user.Surname.Contains(searchPhrase)).ToList();
         }
 
         public List<User> GetMatchingUsersByFullName(string searchPhraseName,
             string searchPhraseSurname)
         {
-            return _db.Users.AsNoTracking().Where(user => user.Name.Contains(searchPhraseName)
+            return _db.Users.Where(user => user.Name.Contains(searchPhraseName)
             && user.Surname.Contains(searchPhraseSurname)).ToList();
         }
 
         public List<User> GetMatchingUsersByEmail(string searchPhraseName)
         {
-            return _db.Users.AsNoTracking().Where(user => user.Email.Contains(searchPhraseName)).ToList();
+            return _db.Users.Where(user => user.Email.Contains(searchPhraseName)).ToList();
         }
 
         public User AddUser(User user)
