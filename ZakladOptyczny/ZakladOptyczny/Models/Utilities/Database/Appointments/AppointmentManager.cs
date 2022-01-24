@@ -14,7 +14,7 @@ namespace ZakladOptyczny.Models.Utilities.Database.Appointments
 
         public List<Appointment> GetAllAppointments()
         {
-            return _db.Appointments.AsNoTracking().Include("User").Include("User").ToList();
+            return _db.Appointments.AsNoTracking().Include("User").ToList();
         }
 
         public List<Appointment> GetUserAppointments(User user)
@@ -32,7 +32,8 @@ namespace ZakladOptyczny.Models.Utilities.Database.Appointments
             Appointment appointment = new Appointment
             {
                 Date = date,
-                User = user
+                User = user,
+                UserId = user.UserId
             };
 
             _db.Appointments.Add(appointment);

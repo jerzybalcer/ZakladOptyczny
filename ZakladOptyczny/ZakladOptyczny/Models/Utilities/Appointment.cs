@@ -9,6 +9,7 @@ namespace ZakladOptyczny.Models.Utilities
         public bool? IsAttended { get; set; }
         public string? Note { get; set; }
         public DateTime Date { get; set; }
+        public int UserId { get; set; }
         public User User { get; set; }
 
         public Appointment(int appointmentId, string prescription, bool isAttended, string note, DateTime date, User user)
@@ -18,6 +19,7 @@ namespace ZakladOptyczny.Models.Utilities
             IsAttended = isAttended;    
             Note = note;
             Date = date;
+            UserId = user.UserId;
             User = user;
         }
 
