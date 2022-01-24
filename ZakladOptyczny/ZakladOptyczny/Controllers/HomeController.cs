@@ -173,9 +173,9 @@ namespace ZakladOptyczny.Controllers
             return Wizyty(user.UserId);
         }
 
-        public IActionResult UmowRejestrator(DateTime date, string pesel)
+        public IActionResult UmowRejestrator(DateTime date, string mail)
         {
-            var user = _usersManager.GetUserByPesel(pesel);
+            var user = _usersManager.GetMatchingUsersByEmail(mail)[0];
             if(user != null)
                 return UmowPacjent(date, user);
             else
