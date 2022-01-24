@@ -163,7 +163,7 @@ namespace ZakladOptyczny.Controllers
         public IActionResult UmowPacjent(DateTime date, User user)
         {
             _appointmentsManager.MakeAppointment(date, user);
-            return View("login");
+            return Wizyty(user.UserId);
         }
 
         public IActionResult UmowRejestrator(DateTime date, string mail)
