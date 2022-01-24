@@ -154,7 +154,7 @@ namespace ZakladOptyczny.Controllers
                 }
                 else
                 {
-                    return View("termins");
+                    return Terminy(date);
                 }
             }
             else return View("error");
@@ -166,9 +166,9 @@ namespace ZakladOptyczny.Controllers
             return Wizyty(user.UserId);
         }
 
-        public IActionResult UmowRejestrator(DateTime date, string mail)
+        public IActionResult UmowRejestrator(DateTime date, string pesel)
         {
-            var user = _usersManager.GetMatchingUsersByEmail(mail)[0];
+            var user = _usersManager.GetUserByPesel(pesel);
             if(user != null)
                 return UmowPacjent(date, user);
             else
