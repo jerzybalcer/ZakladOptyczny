@@ -19,8 +19,12 @@
             <td> @app.AppointmentId </td>
             <td> @app.Date </td>
             
-            <td> <input type="button", value="Anuluj wizytę">
-                <input type="button", value="Więcej informacji", onclick="location.href='@Url.Action("Check", "Home", new {appID = app.AppointmentId})'"> 
+            <td> 
+                    @if(@app.IsAttended == null)
+                    {
+                        <input type="button", value="Anuluj wizytę", onclick="location.href='@Url.Action("Cancel", "Home", new {appID = app.AppointmentId})'">
+                    }
+                    <input type="button", value="Więcej informacji", onclick="location.href='@Url.Action("Check", "Home", new {appID = app.AppointmentId})'"> 
             </td>
             </tr>
         }

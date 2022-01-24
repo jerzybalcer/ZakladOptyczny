@@ -73,6 +73,13 @@ namespace ZakladOptyczny.Controllers
             ViewBag.Apps = apps;
             return View("visits");
         }
+        public IActionResult Cancel(int appID)
+        {
+            var app = _appointmentsManager.GetAppointmentById(appID);
+            var userID = app.UserId;
+            _appointmentsManager.CancelAppointment(app);
+            return Wizyty(userID);
+        }
         public IActionResult Check(int appID)
         {
             string tempCookieValue = HttpContext.Request.Cookies["opticianpractice_current-user-email"];
