@@ -25,7 +25,10 @@ builder.Services.AddAuthentication(options =>
                 options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
             })
-            .AddCookie()
+            .AddCookie(options => { 
+                options.ExpireTimeSpan = TimeSpan.FromDays(30);
+                options.Cookie.MaxAge = options.ExpireTimeSpan;
+            })
             .AddGoogle(GoogleDefaults.AuthenticationScheme, options =>
             {
                 options.ClientId = "96433081251-n3gafb9c592ch92uujkv2jd3h80rverd.apps.googleusercontent.com";
