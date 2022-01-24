@@ -18,7 +18,10 @@
             <tr>
             <td> @app.AppointmentId </td>
             <td> @app.Date </td>
-            <td> <input type="button", value="Więcej informacji", onclick="location.href='@Url.Action("Check", "Home", new {appID = app.AppointmentId})'"> </td>
+            
+            <td> <input type="button", value="Anuluj wizytę">
+                <input type="button", value="Więcej informacji", onclick="location.href='@Url.Action("Check", "Home", new {appID = app.AppointmentId})'"> 
+            </td>
             </tr>
         }
     </table>
